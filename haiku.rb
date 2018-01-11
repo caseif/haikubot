@@ -140,7 +140,12 @@ playlist = create_playlist(service, "#{playlist_name}", "Auto-generated playlist
 
 puts "Adding videos to playlist..."
 ids.each { |id |
-    add_to_playlist(service, playlist, id)
+    begin
+        add_to_playlist(service, playlist, id)
+    rescue => e
+        puts "Failed to add video ID #{id} to playlist."
+        puts e
+    end
 }
 
 puts "Done!"
